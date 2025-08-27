@@ -7,264 +7,608 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&family=Jua&display=swap');
         
         * {
-            font-family: 'Kanit', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #fda085 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
+            font-family: 'Kanit', sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(to bottom, #FFE4E1 0%, #FFF0F5 50%, #F8BBD0 100%);
+        }
+        
+        .korean-font {
+            font-family: 'Jua', sans-serif;
+        }
+        
+        /* Parallax Container */
+        .parallax-container {
+            position: relative;
+            width: 100%;
             min-height: 100vh;
         }
         
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        .content-container {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        }
-        
-        .korean-flag {
-            background: linear-gradient(90deg, #003478 30%, #ffffff 30% 70%, #c60c30 70%);
-            height: 5px;
+        /* Sky Background */
+        .sky-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            margin: 20px 0;
+            height: 100%;
+            background: linear-gradient(to bottom, 
+                #87CEEB 0%, 
+                #FFB6C1 30%, 
+                #FFE4E1 60%, 
+                #FFF0F5 100%);
+            z-index: -10;
         }
         
-        .title-glow {
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 
-                         0 0 40px rgba(102, 126, 234, 0.8), 
-                         0 0 60px rgba(245, 87, 108, 0.8);
-            animation: pulse 2s ease-in-out infinite;
+        /* Clouds */
+        .cloud {
+            position: absolute;
+            background: white;
+            border-radius: 100px;
+            opacity: 0.8;
+        }
+        
+        .cloud::before {
+            content: '';
+            position: absolute;
+            background: white;
+            border-radius: 100px;
+        }
+        
+        .cloud1 {
+            width: 100px;
+            height: 40px;
+            top: 20%;
+            left: -100px;
+            animation: float-cloud 30s infinite;
+        }
+        
+        .cloud1::before {
+            width: 50px;
+            height: 50px;
+            top: -25px;
+            left: 10px;
+        }
+        
+        .cloud2 {
+            width: 80px;
+            height: 35px;
+            top: 40%;
+            right: -80px;
+            animation: float-cloud-reverse 25s infinite;
+        }
+        
+        .cloud2::before {
+            width: 60px;
+            height: 40px;
+            top: -20px;
+            right: 15px;
+        }
+        
+        @keyframes float-cloud {
+            from { transform: translateX(0); }
+            to { transform: translateX(calc(100vw + 100px)); }
+        }
+        
+        @keyframes float-cloud-reverse {
+            from { transform: translateX(0); }
+            to { transform: translateX(calc(-100vw - 100px)); }
+        }
+        
+        /* Cherry Blossoms */
+        .sakura {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            animation: fall-rotate 10s linear infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .sakura::before {
+            content: '🌸';
+            font-size: 24px;
+            position: absolute;
+        }
+        
+        @keyframes fall-rotate {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(calc(100vh + 100px)) rotate(360deg);
+                opacity: 0.3;
+            }
+        }
+        
+        /* Pagoda Tower */
+        .pagoda {
+            position: absolute;
+            width: 150px;
+            height: 200px;
+            right: 10%;
+            top: 30%;
+            z-index: 2;
+            transform: translateZ(0);
+        }
+        
+        .pagoda-floor {
+            position: relative;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #8B4513, #D2691E);
+            border: 2px solid #654321;
+        }
+        
+        .roof {
+            position: absolute;
+            background: linear-gradient(135deg, #DC143C, #8B0000);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+        
+        /* Hanbok Characters */
+        .hanbok-girl {
+            position: absolute;
+            bottom: 15%;
+            left: 15%;
+            width: 120px;
+            height: 180px;
+            z-index: 5;
+            animation: sway 3s ease-in-out infinite;
+        }
+        
+        .hanbok-boy {
+            position: absolute;
+            bottom: 15%;
+            right: 20%;
+            width: 120px;
+            height: 180px;
+            z-index: 5;
+            animation: sway 3s ease-in-out infinite reverse;
+        }
+        
+        @keyframes sway {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            50% { transform: translateX(10px) rotate(2deg); }
+        }
+        
+        /* Korean Traditional Gate */
+        .gate {
+            position: absolute;
+            width: 300px;
+            height: 250px;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 25%;
+            z-index: 3;
+        }
+        
+        /* Main Content */
+        .main-content {
+            position: relative;
+            z-index: 10;
+            padding: 50px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .title-section {
+            text-align: center;
+            padding: 100px 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .title-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,192,203,0.3) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
         }
         
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.9; }
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.3; }
         }
         
-        .zone-badge {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            display: inline-block;
-            padding: 8px 20px;
-            border-radius: 25px;
-            margin: 10px 5px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-        
-        .zone-badge:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-        }
-        
-        .activity-card {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            padding: 20ного;
-            border-radius: 20px;
-            margin: 15px 0;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-        }
-        
-        .activity-card:hover {
-            transform: translateX(10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-        }
-        
-        .event-info {
-            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-            border-radius: 20px;
-            padding: 20px;
-            margin: 20px 0;
-            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .floating {
-            animation: float 3s ease-in-out infinite;
+        .floating-element {
+            position: absolute;
+            animation: float 6s ease-in-out infinite;
         }
         
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+            50% { transform: translateY(-30px); }
         }
         
-        .star-animation {
-            animation: starRotate 4s linear infinite;
+        .kimchi {
+            left: 5%;
+            top: 20%;
+            font-size: 40px;
+            animation-delay: 0s;
         }
         
-        @keyframes starRotate {
+        .bibimbap {
+            right: 8%;
+            top: 25%;
+            font-size: 35px;
+            animation-delay: 1s;
+        }
+        
+        .kpop {
+            left: 10%;
+            bottom: 20%;
+            font-size: 45px;
+            animation-delay: 2s;
+        }
+        
+        .hangeul {
+            right: 5%;
+            bottom: 25%;
+            font-size: 50px;
+            animation-delay: 3s;
+        }
+        
+        /* Info Cards */
+        .info-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 0.8s ease;
+            max-width: 800px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,192,203,0.2), transparent);
+            transition: left 0.8s ease;
+        }
+        
+        .info-card:hover::before {
+            left: 100%;
+        }
+        
+        .info-card.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        /* Taegeuk Pattern */
+        .taegeuk {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            opacity: 0.1;
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
         
-        .countdown-timer {
-            background: rgba(0, 0, 0, 0.8);
-            color: #fff;
-            padding: 20px;
-            border-radius: 15px;
-            display: inline-block;
-            font-size: 24px;
-            font-weight: bold;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        /* Ground Elements */
+        .ground {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(to top, #8FBC8F 0%, #90EE90 100%);
+            z-index: 4;
         }
         
+        .mountain {
+            position: absolute;
+            bottom: 100px;
+            width: 300px;
+            height: 200px;
+            background: linear-gradient(135deg, #4682B4, #87CEEB);
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            z-index: 1;
+        }
+        
+        .mountain1 {
+            left: 5%;
+            transform: scale(0.8);
+            opacity: 0.7;
+        }
+        
+        .mountain2 {
+            right: 10%;
+            transform: scale(1.2);
+            opacity: 0.5;
+        }
+        
+        /* Responsive */
         @media (max-width: 768px) {
-            .content-container {
-                border-radius: 20px;
-                margin: 10px;
+            .hanbok-girl, .hanbok-boy {
+                width: 80px;
+                height: 120px;
             }
             
-            .zone-badge {
-                display: block;
-                margin: 10px auto;
-                text-align: center;
+            .gate {
+                width: 200px;
+                height: 170px;
             }
+            
+            .pagoda {
+                width: 100px;
+                height: 130px;
+            }
+            
+            .floating-element {
+                font-size: 30px !important;
+            }
+        }
+        
+        /* Lantern */
+        .lantern {
+            position: absolute;
+            width: 60px;
+            height: 80px;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+            animation: swing 4s ease-in-out infinite;
+        }
+        
+        @keyframes swing {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+        
+        .lantern1 {
+            top: 10%;
+            left: 30%;
+            animation-delay: 0s;
+        }
+        
+        .lantern2 {
+            top: 15%;
+            right: 25%;
+            animation-delay: 2s;
         }
     </style>
 </head>
 <body>
-    <div class="container mx-auto px-4 py-8">
-        <div class="content-container p-8 md:p-12">
-            <!-- Header with Flags -->
-            <div class="text-center mb-8">
-                <div class="text-6xl floating">🇰🇷</div>
-                <h1 class="text-4xl md:text-6xl font-bold title-glow text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 my-4">
-                    ✨ SAWASDEE KOREA 2025 ✨
-                </h1>
-                <p class="text-2xl md:text-3xl font-semibold text-gray-800">Korea Welcomes You!</p>
-                <div class="korean-flag mt-6"></div>
+    <!-- Sky Background -->
+    <div class="sky-bg"></div>
+    
+    <!-- Clouds -->
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    
+    <!-- Cherry Blossoms (will be added by JS) -->
+    <div id="sakura-container"></div>
+    
+    <!-- Mountains -->
+    <div class="mountain mountain1"></div>
+    <div class="mountain mountain2"></div>
+    
+    <!-- Korean Traditional Elements -->
+    <div class="pagoda">
+        <div class="roof" style="width: 150px; height: 50px; top: 0;"></div>
+        <div class="pagoda-floor" style="width: 120px; height: 40px; top: 50px;"></div>
+        <div class="roof" style="width: 130px; height: 40px; top: 90px; left: 10px;"></div>
+        <div class="pagoda-floor" style="width: 100px; height: 40px; top: 130px;"></div>
+        <div class="roof" style="width: 110px; height: 30px; top: 170px; left: 20px;"></div>
+    </div>
+    
+    <!-- Gate -->
+    <div class="gate">
+        <svg viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg">
+            <rect x="20" y="100" width="40" height="150" fill="#8B4513"/>
+            <rect x="240" y="100" width="40" height="150" fill="#8B4513"/>
+            <path d="M 10 100 Q 150 50 290 100 L 280 120 Q 150 70 20 120 Z" fill="#DC143C"/>
+            <rect x="60" y="120" width="180" height="20" fill="#8B4513"/>
+        </svg>
+    </div>
+    
+    <!-- Hanbok Characters -->
+    <div class="hanbok-girl">
+        <svg viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="40" r="20" fill="#FDBCB4"/>
+            <ellipse cx="60" cy="90" rx="35" ry="20" fill="#FF69B4"/>
+            <path d="M 25 90 L 20 150 L 100 150 L 95 90" fill="#FF1493"/>
+            <rect x="50" y="60" width="20" height="30" fill="#FFB6C1"/>
+            <circle cx="50" cy="35" r="2" fill="black"/>
+            <circle cx="70" cy="35" r="2" fill="black"/>
+            <path d="M 55 45 Q 60 48 65 45" stroke="black" fill="none" stroke-width="1"/>
+        </svg>
+    </div>
+    
+    <div class="hanbok-boy">
+        <svg viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="40" r="20" fill="#FDBCB4"/>
+            <rect x="40" y="60" width="40" height="50" fill="#4682B4"/>
+            <rect x="35" y="110" width="20" height="40" fill="#2E4C8B"/>
+            <rect x="65" y="110" width="20" height="40" fill="#2E4C8B"/>
+            <rect x="30" y="55" width="60" height="10" rx="5" fill="#191970"/>
+            <circle cx="50" cy="35" r="2" fill="black"/>
+            <circle cx="70" cy="35" r="2" fill="black"/>
+            <path d="M 55 45 Q 60 48 65 45" stroke="black" fill="none" stroke-width="1"/>
+        </svg>
+    </div>
+    
+    <!-- Lanterns -->
+    <div class="lantern lantern1"></div>
+    <div class="lantern lantern2"></div>
+    
+    <!-- Floating Elements -->
+    <div class="floating-element kimchi">🥬</div>
+    <div class="floating-element bibimbap">🍜</div>
+    <div class="floating-element kpop">🎤</div>
+    <div class="floating-element hangeul">한</div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Title Section -->
+        <div class="title-section">
+            <div class="taegeuk" style="top: 10px; right: 10px;">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="25" r="12.5" fill="#DC143C"/>
+                    <circle cx="50" cy="75" r="12.5" fill="#003478"/>
+                    <path d="M 50 0 A 25 25 0 0 1 50 50 A 12.5 12.5 0 0 0 50 25 A 12.5 12.5 0 0 1 50 0" fill="#DC143C"/>
+                    <path d="M 50 100 A 25 25 0 0 1 50 50 A 12.5 12.5 0 0 1 50 75 A 12.5 12.5 0 0 0 50 100" fill="#003478"/>
+                </svg>
             </div>
-
-            <!-- Main Description -->
-            <div class="text-center mb-10">
-                <p class="text-xl md:text-2xl font-medium text-gray-700 leading-relaxed">
-                    🎊 สายเกาเตรียมตัวกรี๊ดได้เลย! 🎊<br>
-                    งาน K-Culture ที่ใหญ่ที่สุดแห่งปี<br>
-                    รวมทุกความเป็นเกาหลีมาไว้ในที่เดียว!
-                </p>
-                <p class="text-lg mt-4 text-gray-600">
-                    ไม่ว่าจะเป็นสายเที่ยว สายกิน สายบิวตี้ หรือสายติ่ง K-POP บอกเลยว่ามีครบ!
-                </p>
-            </div>
-
+            
+            <h1 class="text-5xl md:text-7xl font-bold mb-4 korean-font" style="background: linear-gradient(135deg, #DC143C, #003478, #DC143C); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+                🇰🇷 SAWASDEE KOREA 2025 🇰🇷
+            </h1>
+            <p class="text-2xl md:text-3xl font-semibold text-pink-600 mb-4">Korea Welcomes You!</p>
+            <p class="text-xl text-gray-700">✨ งาน K-Culture ที่ใหญ่ที่สุดแห่งปี ✨</p>
+            <p class="text-lg text-gray-600 mt-2">รวมทุกความเป็นเกาหลีมาไว้ในที่เดียว!</p>
+            
             <!-- Event Image -->
-            <div class="text-center mb-10">
+            <div class="mt-8">
                 <img src="https://lh5.googleusercontent.com/d/1iq-TGA35xF7J3PPO3wzYPvdGIrZ8EJFk" 
-                     alt="SAWASDEE KOREA 2025 Event" 
-                     class="w-full max-w-4xl mx-auto rounded-2xl shadow-2xl hover:scale-105 transition-transform duration-300">
+                     alt="SAWASDEE KOREA 2025" 
+                     class="w-full max-w-3xl mx-auto rounded-2xl shadow-2xl"
+                     style="border: 5px solid white;">
             </div>
-
-            <!-- Event Zones -->
-            <div class="mb-10">
-                <h2 class="text-3xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
-                    🎯 โซนกิจกรรมภายในงาน
-                </h2>
-                <div class="flex flex-wrap justify-center">
-                    <div class="zone-badge">
-                        <i class="fas fa-plane mr-2"></i>📌 K-Travel - แจกไอเดียทริป Autumn & Winter
+        </div>
+        
+        <!-- Info Cards -->
+        <div class="info-card">
+            <h2 class="text-2xl font-bold mb-4 text-center korean-font" style="color: #DC143C;">
+                📌 โซนกิจกรรมภายในงาน
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="p-4 bg-gradient-to-r from-pink-100 to-purple-100 rounded-lg">
+                    <h3 class="font-bold text-purple-700">✈️ K-Travel</h3>
+                    <p class="text-sm">แจกไอเดียทริป Autumn & Winter เกาหลี พร้อมโปรสุดปัง</p>
+                </div>
+                <div class="p-4 bg-gradient-to-r from-orange-100 to-red-100 rounded-lg">
+                    <h3 class="font-bold text-red-700">🍜 K-Food & Wellness</h3>
+                    <p class="text-sm">ลองรสชาติอาหารเกาหลี + เวิร์กช็อปสายเฮลท์ตี้</p>
+                </div>
+                <div class="p-4 bg-gradient-to-r from-blue-100 to-indigo-100 rounded-lg">
+                    <h3 class="font-bold text-indigo-700">💄 K-Beauty</h3>
+                    <p class="text-sm">Personal Color ที่ทุกคนต้องไปลองจริง!</p>
+                </div>
+                <div class="p-4 bg-gradient-to-r from-green-100 to-teal-100 rounded-lg">
+                    <h3 class="font-bold text-teal-700">🎭 K-Culture</h3>
+                    <p class="text-sm">การแสดงเกาหลีแท้ๆ ขบวนพระราชพิธี & ดนตรีกูกัก</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="info-card">
+            <h2 class="text-2xl font-bold mb-4 text-center korean-font" style="color: #003478;">
+                🎤 กิจกรรมพิเศษบนเวที
+            </h2>
+            <div class="space-y-3">
+                <div class="flex items-center">
+                    <span class="text-3xl mr-4">🎵</span>
+                    <div>
+                        <h3 class="font-bold">มินิคอนเสิร์ต</h3>
+                        <p class="text-sm text-gray-600">No One Else, ATLAS และ THE FIX จากเกาหลี</p>
                     </div>
-                    <div class="zone-badge">
-                        <i class="fas fa-utensils mr-2"></i>🍜 K-Food & K-Wellness - ลองรสชาติ + เวิร์กช็อป
+                </div>
+                <div class="flex items-center">
+                    <span class="text-3xl mr-4">💃</span>
+                    <div>
+                        <h3 class="font-bold">Cover Dance & Singing Contest</h3>
+                        <p class="text-sm text-gray-600">ให้สายติ่งได้ปล่อยพลัง</p>
                     </div>
-                    <div class="zone-badge">
-                        <i class="fas fa-palette mr-2"></i>💄 K-Beauty & Personal Color
+                </div>
+                <div class="flex items-center">
+                    <span class="text-3xl mr-4">💖</span>
+                    <div>
+                        <h3 class="font-bold">Exclusive Talk</h3>
+                        <p class="text-sm text-gray-600">"จองแฮอิน" 🫶 และ "หมาก–คิม" 💕</p>
                     </div>
-                    <div class="zone-badge">
-                        <i class="fas fa-theater-masks mr-2"></i>🎭 K-Culture - การแสดงเกาหลีแท้ๆ
+                </div>
+                <div class="flex items-center">
+                    <span class="text-3xl mr-4">🎁</span>
+                    <div>
+                        <h3 class="font-bold">ของแจก ของรางวัล</h3>
+                        <p class="text-sm text-gray-600">กิจกรรมพิเศษเพียบตลอดทั้งวัน!</p>
                     </div>
                 </div>
             </div>
-
-            <!-- Special Activities -->
-            <div class="mb-10">
-                <h2 class="text-3xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                    🎤 กิจกรรมพิเศษบนสเตจ
-                </h2>
+        </div>
+        
+        <div class="info-card">
+            <h2 class="text-2xl font-bold mb-4 text-center korean-font" style="color: #DC143C;">
+                📍 รายละเอียดงาน
+            </h2>
+            <div class="text-center space-y-2">
+                <p class="text-lg"><span class="font-bold">📅 วันที่:</span> 30–31 สิงหาคม 2025</p>
+                <p class="text-lg"><span class="font-bold">⏰ เวลา:</span> 10.00 – 20.00 น.</p>
+                <p class="text-lg"><span class="font-bold">📍 สถานที่:</span> สุราลัย ฮอลล์ ชั้น 7 ICONSIAM</p>
                 
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="activity-card">
-                        <h3 class="text-xl font-bold mb-2">🎵 มินิคอนเสิร์ต</h3>
-                        <p>• No One Else<br>• ATLAS<br>• THE FIX<br>จากประเทศเกาหลี</p>
-                    </div>
-                    <div class="activity-card">
-                        <h3 class="text-xl font-bold mb-2">💃 Cover Dance & Singing Contest</h3>
-                        <p>ให้สายติ่งได้ปล่อยพลังเต็มที่!</p>
-                    </div>
-                    <div class="activity-card md:col-span-2">
-                        <h3 class="text-xl font-bold mb-2">💖 Exclusive Talk สุดพิเศษ</h3>
-                        <p>• "จองแฮอิน" 🫶 พูดคุยสุดฟิน<br>
-                        • "หมาก–คิม" 💕 เล่าความรักโรแมนติกสไตล์เกาหลี</p>
-                    </div>
+                <div class="mt-6 p-4 bg-yellow-50 rounded-lg">
+                    <p class="text-xl font-bold mb-2">⏳ นับถอยหลัง</p>
+                    <div id="countdown" class="text-2xl font-bold text-red-600"></div>
                 </div>
-            </div>
-
-            <!-- Giveaway Section -->
-            <div class="text-center mb-10">
-                <div class="star-animation inline-block text-4xl">🎁</div>
-                <h3 class="text-2xl font-bold mt-4 mb-2 text-purple-600">ของแจก ของรางวัล</h3>
-                <p class="text-lg text-gray-700">และกิจกรรมพิเศษเพียบตลอดทั้งวัน!</p>
-            </div>
-
-            <!-- Event Info -->
-            <div class="event-info">
-                <h2 class="text-2xl font-bold text-center mb-6 text-orange-800">📢 รายละเอียดงาน</h2>
-                <div class="grid md:grid-cols-3 gap-4 text-center">
-                    <div>
-                        <p class="text-3xl mb-2">📅</p>
-                        <p class="font-bold text-lg">วันที่</p>
-                        <p>30–31 สิงหาคม 2025</p>
-                    </div>
-                    <div>
-                        <p class="text-3xl mb-2">⏰</p>
-                        <p class="font-bold text-lg">เวลา</p>
-                        <p>10.00 – 20.00 น.</p>
-                    </div>
-                    <div>
-                        <p class="text-3xl mb-2">📍</p>
-                        <p class="font-bold text-lg">สถานที่</p>
-                        <p>สุราลัย ฮอลล์ ชั้น 7<br>ICONSIAM</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Countdown -->
-            <div class="text-center my-10">
-                <h3 class="text-2xl font-bold mb-4 text-purple-600">⏳ นับถอยหลังสู่งาน</h3>
-                <div class="countdown-timer">
-                    <span id="countdown">กำลังคำนวณ...</span>
-                </div>
-            </div>
-
-            <!-- Footer -->
-            <div class="text-center mt-10 pt-6 border-t-2 border-gray-200">
-                <p class="text-xl font-semibold mb-4 text-blue-600">
-                    👉 ติดตามรายละเอียดเพิ่มเติมได้ที่
-                </p>
-                <a href="https://www.facebook.com/KTOThailand" target="_blank" 
-                   class="inline-block bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-medium hover:bg-blue-700 transition-colors">
-                    <i class="fab fa-facebook mr-2"></i>Facebook: KTO Thailand
-                </a>
+                
                 <div class="mt-6">
-                    <p class="text-gray-600">Korea Tourism Organization Thailand</p>
-                    <p class="text-2xl mt-2">🇰🇷 🤝 🇹🇭</p>
+                    <p class="font-bold text-lg mb-2">👉 ติดตามรายละเอียดเพิ่มเติม</p>
+                    <a href="https://www.facebook.com/KTOThailand" target="_blank" 
+                       class="inline-block bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition">
+                        <i class="fab fa-facebook mr-2"></i>Facebook: KTO Thailand
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-
+    
+    <!-- Ground -->
+    <div class="ground"></div>
+    
     <script>
+        // Create Sakura Petals
+        function createSakura() {
+            const container = document.getElementById('sakura-container');
+            const sakura = document.createElement('div');
+            sakura.className = 'sakura';
+            sakura.style.left = Math.random() * 100 + '%';
+            sakura.style.animationDelay = Math.random() * 10 + 's';
+            sakura.style.animationDuration = (10 + Math.random() * 10) + 's';
+            container.appendChild(sakura);
+            
+            setTimeout(() => {
+                sakura.remove();
+            }, 20000);
+        }
+        
+        // Generate sakura periodically
+        setInterval(createSakura, 3000);
+        
+        // Initial sakura
+        for(let i = 0; i < 5; i++) {
+            setTimeout(createSakura, i * 1000);
+        }
+        
         // Countdown Timer
         function updateCountdown() {
             const eventDate = new Date('2025-08-30T10:00:00');
@@ -280,12 +624,76 @@
                 document.getElementById('countdown').textContent = 
                     `${days} วัน ${hours} ชั่วโมง ${minutes} นาที ${seconds} วินาที`;
             } else {
-                document.getElementById('countdown').textContent = 'งานเริ่มแล้ว!';
+                document.getElementById('countdown').textContent = '🎉 งานเริ่มแล้ว! 🎉';
             }
         }
         
         setInterval(updateCountdown, 1000);
         updateCountdown();
+        
+        // Parallax Scroll Effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            
+            // Parallax for different elements
+            const clouds = document.querySelectorAll('.cloud');
+            clouds.forEach((cloud, index) => {
+                const speed = 0.5 + (index * 0.2);
+                cloud.style.transform = `translateX(${scrolled * speed}px)`;
+            });
+            
+            const pagoda = document.querySelector('.pagoda');
+            if(pagoda) {
+                pagoda.style.transform = `translateY(${scrolled * 0.3}px) translateZ(0)`;
+            }
+            
+            const mountains = document.querySelectorAll('.mountain');
+            mountains.forEach((mountain, index) => {
+                const speed = 0.2 + (index * 0.1);
+                mountain.style.transform = `translateY(${scrolled * speed}px) scale(${mountain.classList.contains('mountain1') ? 0.8 : 1.2})`;
+            });
+            
+            const floatingElements = document.querySelectorAll('.floating-element');
+            floatingElements.forEach((el, index) => {
+                const speed = 0.1 + (index * 0.05);
+                el.style.transform = `translateY(${-30 + scrolled * speed}px)`;
+            });
+        });
+        
+        // Intersection Observer for Info Cards
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.info-card').forEach(card => {
+            observer.observe(card);
+        });
+        
+        // Mouse Parallax for Hanbok Characters
+        document.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX / window.innerWidth - 0.5;
+            const mouseY = e.clientY / window.innerHeight - 0.5;
+            
+            const hanbokGirl = document.querySelector('.hanbok-girl');
+            const hanbokBoy = document.querySelector('.hanbok-boy');
+            
+            if(hanbokGirl) {
+                hanbokGirl.style.transform = `translateX(${mouseX * 20}px) translateY(${mouseY * 10}px)`;
+            }
+            
+            if(hanbokBoy) {
+                hanbokBoy.style.transform = `translateX(${mouseX * -20}px) translateY(${mouseY * -10}px)`;
+            }
+        });
     </script>
 </body>
 </html>
