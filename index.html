@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAWASDEE KOREA 2025 - Korea Welcomes You!</title>
+    <title>SAWASDEE KOREA 2025 - Korea Farm Festival</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&family=Jua&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Jua&family=Gamja+Flower&display=swap');
         
         * {
             margin: 0;
@@ -15,36 +15,57 @@
             box-sizing: border-box;
         }
         
+        html {
+            scroll-behavior: smooth;
+        }
+        
         body {
             font-family: 'Kanit', sans-serif;
+            background: linear-gradient(to bottom, #87CEEB 0%, #98FB98 50%, #90EE90 100%);
+            min-height: 200vh;
             overflow-x: hidden;
-            background: linear-gradient(to bottom, #FFE4E1 0%, #FFF0F5 50%, #F8BBD0 100%);
+            position: relative;
         }
         
         .korean-font {
-            font-family: 'Jua', sans-serif;
+            font-family: 'Jua', 'Gamja Flower', cursive;
         }
         
-        /* Parallax Container */
-        .parallax-container {
+        /* Container */
+        .farm-container {
             position: relative;
             width: 100%;
-            min-height: 100vh;
+            min-height: 200vh;
         }
         
-        /* Sky Background */
-        .sky-bg {
+        /* Sky with gradient */
+        .sky {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, 
-                #87CEEB 0%, 
-                #FFB6C1 30%, 
-                #FFE4E1 60%, 
-                #FFF0F5 100%);
-            z-index: -10;
+            height: 60vh;
+            background: linear-gradient(to bottom, #87CEEB, #FFE4E1);
+            z-index: -2;
+        }
+        
+        /* Sun */
+        .sun {
+            position: fixed;
+            top: 50px;
+            right: 100px;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #FFD700, #FFA500);
+            border-radius: 50%;
+            box-shadow: 0 0 50px #FFD700;
+            animation: sun-glow 3s ease-in-out infinite;
+            z-index: 1;
+        }
+        
+        @keyframes sun-glow {
+            0%, 100% { box-shadow: 0 0 50px #FFD700; }
+            50% { box-shadow: 0 0 80px #FFA500; }
         }
         
         /* Clouds */
@@ -53,9 +74,11 @@
             background: white;
             border-radius: 100px;
             opacity: 0.8;
+            z-index: 2;
         }
         
-        .cloud::before {
+        .cloud::before,
+        .cloud::after {
             content: '';
             position: absolute;
             background: white;
@@ -65,9 +88,8 @@
         .cloud1 {
             width: 100px;
             height: 40px;
-            top: 20%;
-            left: -100px;
-            animation: float-cloud 30s infinite;
+            top: 100px;
+            animation: drift 30s infinite;
         }
         
         .cloud1::before {
@@ -77,622 +99,664 @@
             left: 10px;
         }
         
-        .cloud2 {
-            width: 80px;
-            height: 35px;
-            top: 40%;
-            right: -80px;
-            animation: float-cloud-reverse 25s infinite;
-        }
-        
-        .cloud2::before {
+        .cloud1::after {
             width: 60px;
-            height: 40px;
-            top: -20px;
-            right: 15px;
-        }
-        
-        @keyframes float-cloud {
-            from { transform: translateX(0); }
-            to { transform: translateX(calc(100vw + 100px)); }
-        }
-        
-        @keyframes float-cloud-reverse {
-            from { transform: translateX(0); }
-            to { transform: translateX(calc(-100vw - 100px)); }
-        }
-        
-        /* Cherry Blossoms */
-        .sakura {
-            position: fixed;
-            width: 30px;
             height: 30px;
-            animation: fall-rotate 10s linear infinite;
-            z-index: 1;
-            pointer-events: none;
+            top: -15px;
+            right: 10px;
         }
         
-        .sakura::before {
-            content: '🌸';
-            font-size: 24px;
+        @keyframes drift {
+            0% { left: -150px; }
+            100% { left: 110%; }
+        }
+        
+        /* Hanging Sign (Main Title) */
+        .hanging-sign {
             position: absolute;
-        }
-        
-        @keyframes fall-rotate {
-            0% {
-                transform: translateY(-100px) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(calc(100vh + 100px)) rotate(360deg);
-                opacity: 0.3;
-            }
-        }
-        
-        /* Pagoda Tower */
-        .pagoda {
-            position: absolute;
-            width: 150px;
-            height: 200px;
-            right: 10%;
-            top: 30%;
-            z-index: 2;
-            transform: translateZ(0);
-        }
-        
-        .pagoda-floor {
-            position: relative;
-            margin: 0 auto;
-            background: linear-gradient(135deg, #8B4513, #D2691E);
-            border: 2px solid #654321;
-        }
-        
-        .roof {
-            position: absolute;
-            background: linear-gradient(135deg, #DC143C, #8B0000);
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-        }
-        
-        /* Hanbok Characters */
-        .hanbok-girl {
-            position: absolute;
-            bottom: 15%;
-            left: 15%;
-            width: 120px;
-            height: 180px;
-            z-index: 5;
-            animation: sway 3s ease-in-out infinite;
-        }
-        
-        .hanbok-boy {
-            position: absolute;
-            bottom: 15%;
-            right: 20%;
-            width: 120px;
-            height: 180px;
-            z-index: 5;
-            animation: sway 3s ease-in-out infinite reverse;
-        }
-        
-        @keyframes sway {
-            0%, 100% { transform: translateX(0) rotate(0deg); }
-            50% { transform: translateX(10px) rotate(2deg); }
-        }
-        
-        /* Korean Traditional Gate */
-        .gate {
-            position: absolute;
-            width: 300px;
-            height: 250px;
+            top: 20px;
             left: 50%;
             transform: translateX(-50%);
-            bottom: 25%;
-            z-index: 3;
-        }
-        
-        /* Main Content */
-        .main-content {
-            position: relative;
-            z-index: 10;
-            padding: 50px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .title-section {
-            text-align: center;
-            padding: 100px 20px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 30px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            margin-bottom: 50px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .title-section::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,192,203,0.3) 0%, transparent 70%);
-            animation: pulse 4s ease-in-out infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.1); opacity: 0.3; }
-        }
-        
-        .floating-element {
-            position: absolute;
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-30px); }
-        }
-        
-        .kimchi {
-            left: 5%;
-            top: 20%;
-            font-size: 40px;
-            animation-delay: 0s;
-        }
-        
-        .bibimbap {
-            right: 8%;
-            top: 25%;
-            font-size: 35px;
-            animation-delay: 1s;
-        }
-        
-        .kpop {
-            left: 10%;
-            bottom: 20%;
-            font-size: 45px;
-            animation-delay: 2s;
-        }
-        
-        .hangeul {
-            right: 5%;
-            bottom: 25%;
-            font-size: 50px;
-            animation-delay: 3s;
-        }
-        
-        /* Info Cards */
-        .info-card {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            margin: 20px auto;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transform: translateY(50px);
-            opacity: 0;
-            transition: all 0.8s ease;
-            max-width: 800px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .info-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,192,203,0.2), transparent);
-            transition: left 0.8s ease;
-        }
-        
-        .info-card:hover::before {
-            left: 100%;
-        }
-        
-        .info-card.visible {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        
-        /* Taegeuk Pattern */
-        .taegeuk {
-            position: absolute;
-            width: 100px;
-            height: 100px;
-            opacity: 0.1;
-            animation: rotate 20s linear infinite;
-        }
-        
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        
-        /* Ground Elements */
-        .ground {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            height: 150px;
-            background: linear-gradient(to top, #8FBC8F 0%, #90EE90 100%);
-            z-index: 4;
-        }
-        
-        .mountain {
-            position: absolute;
-            bottom: 100px;
-            width: 300px;
-            height: 200px;
-            background: linear-gradient(135deg, #4682B4, #87CEEB);
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            z-index: 1;
-        }
-        
-        .mountain1 {
-            left: 5%;
-            transform: scale(0.8);
-            opacity: 0.7;
-        }
-        
-        .mountain2 {
-            right: 10%;
-            transform: scale(1.2);
-            opacity: 0.5;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hanbok-girl, .hanbok-boy {
-                width: 80px;
-                height: 120px;
-            }
-            
-            .gate {
-                width: 200px;
-                height: 170px;
-            }
-            
-            .pagoda {
-                width: 100px;
-                height: 130px;
-            }
-            
-            .floating-element {
-                font-size: 30px !important;
-            }
-        }
-        
-        /* Lantern */
-        .lantern {
-            position: absolute;
-            width: 60px;
-            height: 80px;
-            background: linear-gradient(135deg, #FFD700, #FFA500);
-            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+            z-index: 20;
             animation: swing 4s ease-in-out infinite;
+            transform-origin: top center;
         }
         
         @keyframes swing {
-            0%, 100% { transform: rotate(-5deg); }
-            50% { transform: rotate(5deg); }
+            0%, 100% { transform: translateX(-50%) rotate(-2deg); }
+            50% { transform: translateX(-50%) rotate(2deg); }
         }
         
-        .lantern1 {
-            top: 10%;
-            left: 30%;
+        .sign-rope {
+            width: 2px;
+            height: 30px;
+            background: #8B4513;
+            margin: 0 auto;
+        }
+        
+        .sign-board {
+            background: linear-gradient(135deg, #D2691E, #8B4513);
+            border: 3px solid #654321;
+            border-radius: 10px;
+            padding: 20px 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        
+        .sign-board::before,
+        .sign-board::after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #654321;
+            border-radius: 50%;
+            top: 5px;
+        }
+        
+        .sign-board::before { left: 10px; }
+        .sign-board::after { right: 10px; }
+        
+        .sign-text {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        /* Korean Balloons */
+        .balloon {
+            position: absolute;
+            animation: float-balloon 6s ease-in-out infinite;
+            z-index: 10;
+        }
+        
+        @keyframes float-balloon {
+            0%, 100% { transform: translateY(0) rotate(-5deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
+        }
+        
+        .balloon-string {
+            width: 1px;
+            height: 100px;
+            background: #333;
+            position: absolute;
+            left: 50%;
+            bottom: -100px;
+        }
+        
+        .balloon1 {
+            top: 200px;
+            left: 10%;
             animation-delay: 0s;
         }
         
-        .lantern2 {
-            top: 15%;
-            right: 25%;
+        .balloon2 {
+            top: 250px;
+            right: 15%;
             animation-delay: 2s;
+        }
+        
+        .balloon3 {
+            top: 180px;
+            left: 35%;
+            animation-delay: 1s;
+        }
+        
+        .balloon-circle {
+            width: 80px;
+            height: 100px;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+        }
+        
+        .balloon-red { background: linear-gradient(135deg, #FF69B4, #FF1493); }
+        .balloon-blue { background: linear-gradient(135deg, #87CEEB, #4682B4); }
+        .balloon-yellow { background: linear-gradient(135deg, #FFD700, #FFA500); }
+        
+        /* Wooden Direction Signs */
+        .direction-post {
+            position: absolute;
+            width: 8px;
+            height: 300px;
+            background: linear-gradient(to bottom, #8B4513, #654321);
+            left: 20%;
+            top: 400px;
+            z-index: 15;
+        }
+        
+        .direction-sign {
+            position: absolute;
+            background: linear-gradient(135deg, #DEB887, #D2691E);
+            border: 2px solid #654321;
+            padding: 10px 30px;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: block;
+            clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
+            padding-right: 40px;
+        }
+        
+        .direction-sign:hover {
+            transform: translateX(10px) scale(1.05);
+            filter: brightness(1.1);
+        }
+        
+        .sign1 { top: 20px; left: -5px; }
+        .sign2 { top: 80px; left: -5px; }
+        .sign3 { top: 140px; left: -5px; }
+        .sign4 { top: 200px; left: -5px; }
+        
+        /* Korean Farm Elements */
+        .kimchi-field {
+            position: absolute;
+            bottom: 10%;
+            left: 10%;
+            width: 200px;
+            height: 100px;
+            z-index: 8;
+        }
+        
+        .cabbage {
+            position: absolute;
+            font-size: 40px;
+            animation: grow 3s ease-in-out infinite;
+        }
+        
+        @keyframes grow {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        /* Korean Traditional House */
+        .hanok {
+            position: absolute;
+            right: 10%;
+            bottom: 20%;
+            width: 250px;
+            height: 180px;
+            z-index: 9;
+        }
+        
+        .hanok-roof {
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(135deg, #8B0000, #DC143C);
+            clip-path: polygon(10% 100%, 50% 0%, 90% 100%);
+        }
+        
+        .hanok-body {
+            width: 200px;
+            height: 100px;
+            background: linear-gradient(135deg, #F5DEB3, #DEB887);
+            margin: 0 auto;
+            border: 3px solid #8B4513;
+        }
+        
+        .hanok-door {
+            width: 50px;
+            height: 70px;
+            background: #654321;
+            margin: 15px auto;
+        }
+        
+        /* Fence */
+        .fence {
+            position: absolute;
+            bottom: 5%;
+            width: 100%;
+            height: 80px;
+            display: flex;
+            justify-content: space-around;
+            z-index: 7;
+        }
+        
+        .fence-post {
+            width: 15px;
+            height: 80px;
+            background: linear-gradient(to bottom, #8B4513, #654321);
+            position: relative;
+        }
+        
+        .fence-post::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: -50px;
+            width: 100px;
+            height: 8px;
+            background: #A0522D;
+        }
+        
+        /* Info Panels */
+        .info-panel {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.95);
+            border: 3px solid #8B4513;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 15;
+            max-width: 400px;
+        }
+        
+        .panel1 {
+            top: 600px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .panel2 {
+            top: 900px;
+            right: 10%;
+        }
+        
+        .panel3 {
+            top: 1200px;
+            left: 10%;
+        }
+        
+        /* Grass layers */
+        .grass {
+            position: absolute;
+            bottom: 0;
+            width: 110%;
+            left: -5%;
+            z-index: 6;
+        }
+        
+        .grass-back {
+            height: 200px;
+            background: linear-gradient(to top, #228B22, #32CD32);
+            opacity: 0.8;
+        }
+        
+        .grass-front {
+            height: 150px;
+            background: linear-gradient(to top, #006400, #228B22);
+            bottom: 0;
+            z-index: 11;
+        }
+        
+        /* Floating Elements */
+        .floating-heart {
+            position: absolute;
+            color: #FF1493;
+            font-size: 30px;
+            animation: float-heart 4s ease-in-out infinite;
+            z-index: 12;
+        }
+        
+        @keyframes float-heart {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-20px) scale(1.2); }
+        }
+        
+        /* Korean Scarecrow */
+        .scarecrow {
+            position: absolute;
+            bottom: 15%;
+            left: 40%;
+            width: 100px;
+            height: 150px;
+            z-index: 10;
+        }
+        
+        .scarecrow-head {
+            width: 40px;
+            height: 40px;
+            background: #FFE4B5;
+            border-radius: 50%;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .scarecrow-hat {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 60px;
+            height: 20px;
+            background: linear-gradient(135deg, #8B4513, #D2691E);
+            border-radius: 50%;
+        }
+        
+        .scarecrow-body {
+            width: 60px;
+            height: 80px;
+            background: linear-gradient(135deg, #4682B4, #191970);
+            margin: 10px auto;
+            position: relative;
+        }
+        
+        .scarecrow-arms {
+            position: absolute;
+            top: 10px;
+            left: -30px;
+            width: 120px;
+            height: 5px;
+            background: #8B4513;
+        }
+        
+        /* Birds */
+        .bird {
+            position: absolute;
+            font-size: 20px;
+            animation: fly 15s linear infinite;
+            z-index: 13;
+        }
+        
+        @keyframes fly {
+            0% { left: -50px; }
+            100% { left: 110%; }
+        }
+        
+        /* Photo Line Style */
+        .photo-line {
+            position: absolute;
+            top: 350px;
+            right: 5%;
+            width: 300px;
+            z-index: 14;
+        }
+        
+        .rope {
+            width: 100%;
+            height: 2px;
+            background: #8B4513;
+            position: relative;
+        }
+        
+        .photo {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: white;
+            border: 3px solid #8B4513;
+            padding: 5px;
+            transform: rotate(-5deg);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        }
+        
+        .photo:nth-child(2) { left: 0; top: 10px; }
+        .photo:nth-child(3) { left: 100px; top: 10px; transform: rotate(3deg); }
+        .photo:nth-child(4) { left: 200px; top: 10px; transform: rotate(-3deg); }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .direction-post {
+                left: 10px;
+            }
+            
+            .info-panel {
+                max-width: 90%;
+                left: 5% !important;
+                right: 5% !important;
+                transform: none !important;
+            }
+            
+            .hanok {
+                width: 180px;
+                height: 130px;
+            }
+            
+            .sign-text {
+                font-size: 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Sky Background -->
-    <div class="sky-bg"></div>
+    <!-- Sky -->
+    <div class="sky"></div>
+    
+    <!-- Sun -->
+    <div class="sun"></div>
     
     <!-- Clouds -->
     <div class="cloud cloud1"></div>
-    <div class="cloud cloud2"></div>
     
-    <!-- Cherry Blossoms (will be added by JS) -->
-    <div id="sakura-container"></div>
-    
-    <!-- Mountains -->
-    <div class="mountain mountain1"></div>
-    <div class="mountain mountain2"></div>
-    
-    <!-- Korean Traditional Elements -->
-    <div class="pagoda">
-        <div class="roof" style="width: 150px; height: 50px; top: 0;"></div>
-        <div class="pagoda-floor" style="width: 120px; height: 40px; top: 50px;"></div>
-        <div class="roof" style="width: 130px; height: 40px; top: 90px; left: 10px;"></div>
-        <div class="pagoda-floor" style="width: 100px; height: 40px; top: 130px;"></div>
-        <div class="roof" style="width: 110px; height: 30px; top: 170px; left: 20px;"></div>
-    </div>
-    
-    <!-- Gate -->
-    <div class="gate">
-        <svg viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg">
-            <rect x="20" y="100" width="40" height="150" fill="#8B4513"/>
-            <rect x="240" y="100" width="40" height="150" fill="#8B4513"/>
-            <path d="M 10 100 Q 150 50 290 100 L 280 120 Q 150 70 20 120 Z" fill="#DC143C"/>
-            <rect x="60" y="120" width="180" height="20" fill="#8B4513"/>
-        </svg>
-    </div>
-    
-    <!-- Hanbok Characters -->
-    <div class="hanbok-girl">
-        <svg viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="60" cy="40" r="20" fill="#FDBCB4"/>
-            <ellipse cx="60" cy="90" rx="35" ry="20" fill="#FF69B4"/>
-            <path d="M 25 90 L 20 150 L 100 150 L 95 90" fill="#FF1493"/>
-            <rect x="50" y="60" width="20" height="30" fill="#FFB6C1"/>
-            <circle cx="50" cy="35" r="2" fill="black"/>
-            <circle cx="70" cy="35" r="2" fill="black"/>
-            <path d="M 55 45 Q 60 48 65 45" stroke="black" fill="none" stroke-width="1"/>
-        </svg>
-    </div>
-    
-    <div class="hanbok-boy">
-        <svg viewBox="0 0 120 180" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="60" cy="40" r="20" fill="#FDBCB4"/>
-            <rect x="40" y="60" width="40" height="50" fill="#4682B4"/>
-            <rect x="35" y="110" width="20" height="40" fill="#2E4C8B"/>
-            <rect x="65" y="110" width="20" height="40" fill="#2E4C8B"/>
-            <rect x="30" y="55" width="60" height="10" rx="5" fill="#191970"/>
-            <circle cx="50" cy="35" r="2" fill="black"/>
-            <circle cx="70" cy="35" r="2" fill="black"/>
-            <path d="M 55 45 Q 60 48 65 45" stroke="black" fill="none" stroke-width="1"/>
-        </svg>
-    </div>
-    
-    <!-- Lanterns -->
-    <div class="lantern lantern1"></div>
-    <div class="lantern lantern2"></div>
-    
-    <!-- Floating Elements -->
-    <div class="floating-element kimchi">🥬</div>
-    <div class="floating-element bibimbap">🍜</div>
-    <div class="floating-element kpop">🎤</div>
-    <div class="floating-element hangeul">한</div>
-    
-    <!-- Main Content -->
-    <div class="main-content">
-        <!-- Title Section -->
-        <div class="title-section">
-            <div class="taegeuk" style="top: 10px; right: 10px;">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="25" r="12.5" fill="#DC143C"/>
-                    <circle cx="50" cy="75" r="12.5" fill="#003478"/>
-                    <path d="M 50 0 A 25 25 0 0 1 50 50 A 12.5 12.5 0 0 0 50 25 A 12.5 12.5 0 0 1 50 0" fill="#DC143C"/>
-                    <path d="M 50 100 A 25 25 0 0 1 50 50 A 12.5 12.5 0 0 1 50 75 A 12.5 12.5 0 0 0 50 100" fill="#003478"/>
-                </svg>
-            </div>
-            
-            <h1 class="text-5xl md:text-7xl font-bold mb-4 korean-font" style="background: linear-gradient(135deg, #DC143C, #003478, #DC143C); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+    <!-- Hanging Main Sign -->
+    <div class="hanging-sign">
+        <div class="sign-rope"></div>
+        <div class="sign-board">
+            <div class="sign-text korean-font">
                 🇰🇷 SAWASDEE KOREA 2025 🇰🇷
-            </h1>
-            <p class="text-2xl md:text-3xl font-semibold text-pink-600 mb-4">Korea Welcomes You!</p>
-            <p class="text-xl text-gray-700">✨ งาน K-Culture ที่ใหญ่ที่สุดแห่งปี ✨</p>
-            <p class="text-lg text-gray-600 mt-2">รวมทุกความเป็นเกาหลีมาไว้ในที่เดียว!</p>
-            
-            <!-- Event Image -->
-            <div class="mt-8">
-                <img src="https://lh5.googleusercontent.com/d/1iq-TGA35xF7J3PPO3wzYPvdGIrZ8EJFk" 
-                     alt="SAWASDEE KOREA 2025" 
-                     class="w-full max-w-3xl mx-auto rounded-2xl shadow-2xl"
-                     style="border: 5px solid white;">
-            </div>
-        </div>
-        
-        <!-- Info Cards -->
-        <div class="info-card">
-            <h2 class="text-2xl font-bold mb-4 text-center korean-font" style="color: #DC143C;">
-                📌 โซนกิจกรรมภายในงาน
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="p-4 bg-gradient-to-r from-pink-100 to-purple-100 rounded-lg">
-                    <h3 class="font-bold text-purple-700">✈️ K-Travel</h3>
-                    <p class="text-sm">แจกไอเดียทริป Autumn & Winter เกาหลี พร้อมโปรสุดปัง</p>
-                </div>
-                <div class="p-4 bg-gradient-to-r from-orange-100 to-red-100 rounded-lg">
-                    <h3 class="font-bold text-red-700">🍜 K-Food & Wellness</h3>
-                    <p class="text-sm">ลองรสชาติอาหารเกาหลี + เวิร์กช็อปสายเฮลท์ตี้</p>
-                </div>
-                <div class="p-4 bg-gradient-to-r from-blue-100 to-indigo-100 rounded-lg">
-                    <h3 class="font-bold text-indigo-700">💄 K-Beauty</h3>
-                    <p class="text-sm">Personal Color ที่ทุกคนต้องไปลองจริง!</p>
-                </div>
-                <div class="p-4 bg-gradient-to-r from-green-100 to-teal-100 rounded-lg">
-                    <h3 class="font-bold text-teal-700">🎭 K-Culture</h3>
-                    <p class="text-sm">การแสดงเกาหลีแท้ๆ ขบวนพระราชพิธี & ดนตรีกูกัก</p>
-                </div>
-            </div>
-        </div>
-        
-        <div class="info-card">
-            <h2 class="text-2xl font-bold mb-4 text-center korean-font" style="color: #003478;">
-                🎤 กิจกรรมพิเศษบนเวที
-            </h2>
-            <div class="space-y-3">
-                <div class="flex items-center">
-                    <span class="text-3xl mr-4">🎵</span>
-                    <div>
-                        <h3 class="font-bold">มินิคอนเสิร์ต</h3>
-                        <p class="text-sm text-gray-600">No One Else, ATLAS และ THE FIX จากเกาหลี</p>
-                    </div>
-                </div>
-                <div class="flex items-center">
-                    <span class="text-3xl mr-4">💃</span>
-                    <div>
-                        <h3 class="font-bold">Cover Dance & Singing Contest</h3>
-                        <p class="text-sm text-gray-600">ให้สายติ่งได้ปล่อยพลัง</p>
-                    </div>
-                </div>
-                <div class="flex items-center">
-                    <span class="text-3xl mr-4">💖</span>
-                    <div>
-                        <h3 class="font-bold">Exclusive Talk</h3>
-                        <p class="text-sm text-gray-600">"จองแฮอิน" 🫶 และ "หมาก–คิม" 💕</p>
-                    </div>
-                </div>
-                <div class="flex items-center">
-                    <span class="text-3xl mr-4">🎁</span>
-                    <div>
-                        <h3 class="font-bold">ของแจก ของรางวัล</h3>
-                        <p class="text-sm text-gray-600">กิจกรรมพิเศษเพียบตลอดทั้งวัน!</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="info-card">
-            <h2 class="text-2xl font-bold mb-4 text-center korean-font" style="color: #DC143C;">
-                📍 รายละเอียดงาน
-            </h2>
-            <div class="text-center space-y-2">
-                <p class="text-lg"><span class="font-bold">📅 วันที่:</span> 30–31 สิงหาคม 2025</p>
-                <p class="text-lg"><span class="font-bold">⏰ เวลา:</span> 10.00 – 20.00 น.</p>
-                <p class="text-lg"><span class="font-bold">📍 สถานที่:</span> สุราลัย ฮอลล์ ชั้น 7 ICONSIAM</p>
-                
-                <div class="mt-6 p-4 bg-yellow-50 rounded-lg">
-                    <p class="text-xl font-bold mb-2">⏳ นับถอยหลัง</p>
-                    <div id="countdown" class="text-2xl font-bold text-red-600"></div>
-                </div>
-                
-                <div class="mt-6">
-                    <p class="font-bold text-lg mb-2">👉 ติดตามรายละเอียดเพิ่มเติม</p>
-                    <a href="https://www.facebook.com/KTOThailand" target="_blank" 
-                       class="inline-block bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition">
-                        <i class="fab fa-facebook mr-2"></i>Facebook: KTO Thailand
-                    </a>
-                </div>
             </div>
         </div>
     </div>
     
-    <!-- Ground -->
-    <div class="ground"></div>
+    <!-- Balloons -->
+    <div class="balloon balloon1">
+        <div class="balloon-circle balloon-red"></div>
+        <div class="balloon-string"></div>
+    </div>
+    <div class="balloon balloon2">
+        <div class="balloon-circle balloon-blue"></div>
+        <div class="balloon-string"></div>
+    </div>
+    <div class="balloon balloon3">
+        <div class="balloon-circle balloon-yellow"></div>
+        <div class="balloon-string"></div>
+    </div>
+    
+    <!-- Direction Post with Signs -->
+    <div class="direction-post">
+        <a href="#travel" class="direction-sign sign1">
+            <i class="fas fa-plane"></i> K-Travel Zone
+        </a>
+        <a href="#food" class="direction-sign sign2">
+            <i class="fas fa-utensils"></i> K-Food Zone
+        </a>
+        <a href="#beauty" class="direction-sign sign3">
+            <i class="fas fa-palette"></i> K-Beauty Zone
+        </a>
+        <a href="#culture" class="direction-sign sign4">
+            <i class="fas fa-theater-masks"></i> K-Culture Zone
+        </a>
+    </div>
+    
+    <!-- Photo Line -->
+    <div class="photo-line">
+        <div class="rope"></div>
+        <div class="photo">
+            <img src="https://lh5.googleusercontent.com/d/1iq-TGA35xF7J3PPO3wzYPvdGIrZ8EJFk" alt="Event" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div class="photo">
+            <div style="font-size: 40px; text-align: center; line-height: 70px;">🎤</div>
+        </div>
+        <div class="photo">
+            <div style="font-size: 40px; text-align: center; line-height: 70px;">💃</div>
+        </div>
+    </div>
+    
+    <!-- Korean Farm Elements -->
+    <div class="kimchi-field">
+        <div class="cabbage" style="left: 10px; top: 10px;">🥬</div>
+        <div class="cabbage" style="left: 60px; top: 20px; animation-delay: 0.5s;">🥬</div>
+        <div class="cabbage" style="left: 110px; top: 5px; animation-delay: 1s;">🥬</div>
+        <div class="cabbage" style="left: 35px; top: 50px; animation-delay: 1.5s;">🥬</div>
+        <div class="cabbage" style="left: 85px; top: 55px; animation-delay: 2s;">🥬</div>
+        <div class="cabbage" style="left: 140px; top: 45px; animation-delay: 0.3s;">🥬</div>
+    </div>
+    
+    <!-- Hanok (Korean House) -->
+    <div class="hanok">
+        <div class="hanok-roof"></div>
+        <div class="hanok-body">
+            <div class="hanok-door"></div>
+        </div>
+    </div>
+    
+    <!-- Scarecrow -->
+    <div class="scarecrow">
+        <div class="scarecrow-head">
+            <div class="scarecrow-hat"></div>
+        </div>
+        <div class="scarecrow-body">
+            <div class="scarecrow-arms"></div>
+        </div>
+    </div>
+    
+    <!-- Info Panels -->
+    <div class="info-panel panel1" id="travel">
+        <h2 class="text-2xl font-bold mb-4 korean-font" style="color: #DC143C;">
+            Korea Welcomes You! ✨
+        </h2>
+        <p class="text-lg mb-3">งาน K-Culture ที่ใหญ่ที่สุดแห่งปี</p>
+        <p>รวมทุกความเป็นเกาหลีมาไว้ในที่เดียว! สายเกาเตรียมตัวกรี๊ดได้เลย</p>
+        <div class="mt-4 text-center">
+            <span class="text-2xl">🎊 🇰🇷 🎊</span>
+        </div>
+    </div>
+    
+    <div class="info-panel panel2" id="zones">
+        <h3 class="text-xl font-bold mb-3 korean-font">📌 โซนกิจกรรม</h3>
+        <ul class="space-y-2">
+            <li><strong>✈️ K-Travel:</strong> แจกไอเดียทริป Autumn & Winter พร้อมโปรสุดปัง</li>
+            <li><strong>🍜 K-Food:</strong> ลองรสชาติอาหารเกาหลี + เวิร์กช็อป</li>
+            <li><strong>💄 K-Beauty:</strong> Personal Color ที่ทุกคนต้องลอง</li>
+            <li><strong>🎭 K-Culture:</strong> การแสดงเกาหลีแท้ๆ ขบวนพระราชพิธี</li>
+        </ul>
+    </div>
+    
+    <div class="info-panel panel3" id="special">
+        <h3 class="text-xl font-bold mb-3 korean-font">🎤 กิจกรรมพิเศษ</h3>
+        <div class="space-y-2">
+            <p><strong>🎵 มินิคอนเสิร์ต:</strong> No One Else, ATLAS, THE FIX</p>
+            <p><strong>💃 Cover Dance Contest:</strong> ให้สายติ่งได้ปล่อยพลัง</p>
+            <p><strong>💖 Exclusive Talk:</strong> "จองแฮอิน" และ "หมาก-คิม"</p>
+            <p><strong>🎁 ของแจก:</strong> ของรางวัลเพียบตลอดทั้งวัน!</p>
+        </div>
+        <div class="mt-4 p-3 bg-yellow-50 rounded-lg text-center">
+            <p><strong>📅 30-31 สิงหาคม 2025</strong></p>
+            <p><strong>⏰ 10.00-20.00 น.</strong></p>
+            <p><strong>📍 สุราลัย ฮอลล์ ชั้น 7 ICONSIAM</strong></p>
+        </div>
+    </div>
+    
+    <!-- Floating Hearts -->
+    <div class="floating-heart" style="top: 500px; left: 60%;">💕</div>
+    <div class="floating-heart" style="top: 700px; right: 30%; animation-delay: 2s;">💖</div>
+    <div class="floating-heart" style="top: 1000px; left: 25%; animation-delay: 1s;">💗</div>
+    
+    <!-- Birds -->
+    <div class="bird" style="top: 150px;">🕊️</div>
+    <div class="bird" style="top: 200px; animation-delay: 5s;">🦅</div>
+    
+    <!-- Grass Layers -->
+    <div class="grass grass-back"></div>
+    <div class="grass grass-front"></div>
+    
+    <!-- Fence -->
+    <div class="fence">
+        <div class="fence-post"></div>
+        <div class="fence-post"></div>
+        <div class="fence-post"></div>
+        <div class="fence-post"></div>
+        <div class="fence-post"></div>
+        <div class="fence-post"></div>
+        <div class="fence-post"></div>
+        <div class="fence-post"></div>
+    </div>
+    
+    <!-- Facebook Link Bottom -->
+    <div style="position: absolute; bottom: 50px; left: 50%; transform: translateX(-50%); z-index: 20;">
+        <a href="https://www.facebook.com/KTOThailand" target="_blank" 
+           class="inline-block bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition font-bold shadow-lg">
+            <i class="fab fa-facebook mr-2"></i>Facebook: KTO Thailand
+        </a>
+    </div>
     
     <script>
-        // Create Sakura Petals
-        function createSakura() {
-            const container = document.getElementById('sakura-container');
-            const sakura = document.createElement('div');
-            sakura.className = 'sakura';
-            sakura.style.left = Math.random() * 100 + '%';
-            sakura.style.animationDelay = Math.random() * 10 + 's';
-            sakura.style.animationDuration = (10 + Math.random() * 10) + 's';
-            container.appendChild(sakura);
-            
-            setTimeout(() => {
-                sakura.remove();
-            }, 20000);
-        }
-        
-        // Generate sakura periodically
-        setInterval(createSakura, 3000);
-        
-        // Initial sakura
-        for(let i = 0; i < 5; i++) {
-            setTimeout(createSakura, i * 1000);
-        }
-        
-        // Countdown Timer
-        function updateCountdown() {
-            const eventDate = new Date('2025-08-30T10:00:00');
-            const now = new Date();
-            const diff = eventDate - now;
-            
-            if (diff > 0) {
-                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-                
-                document.getElementById('countdown').textContent = 
-                    `${days} วัน ${hours} ชั่วโมง ${minutes} นาที ${seconds} วินาที`;
-            } else {
-                document.getElementById('countdown').textContent = '🎉 งานเริ่มแล้ว! 🎉';
-            }
-        }
-        
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-        
-        // Parallax Scroll Effect
+        // Parallax Scrolling Effect
         window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
+            const scrollY = window.pageYOffset;
             
-            // Parallax for different elements
-            const clouds = document.querySelectorAll('.cloud');
-            clouds.forEach((cloud, index) => {
-                const speed = 0.5 + (index * 0.2);
-                cloud.style.transform = `translateX(${scrolled * speed}px)`;
-            });
-            
-            const pagoda = document.querySelector('.pagoda');
-            if(pagoda) {
-                pagoda.style.transform = `translateY(${scrolled * 0.3}px) translateZ(0)`;
+            // Sun parallax
+            const sun = document.querySelector('.sun');
+            if (sun) {
+                sun.style.transform = `translateY(${scrollY * 0.5}px)`;
             }
             
-            const mountains = document.querySelectorAll('.mountain');
-            mountains.forEach((mountain, index) => {
-                const speed = 0.2 + (index * 0.1);
-                mountain.style.transform = `translateY(${scrolled * speed}px) scale(${mountain.classList.contains('mountain1') ? 0.8 : 1.2})`;
+            // Balloons parallax
+            const balloons = document.querySelectorAll('.balloon');
+            balloons.forEach((balloon, index) => {
+                balloon.style.transform = `translateY(${scrollY * (0.3 + index * 0.1)}px) rotate(${Math.sin(scrollY * 0.01) * 5}deg)`;
             });
             
-            const floatingElements = document.querySelectorAll('.floating-element');
-            floatingElements.forEach((el, index) => {
-                const speed = 0.1 + (index * 0.05);
-                el.style.transform = `translateY(${-30 + scrolled * speed}px)`;
-            });
-        });
-        
-        // Intersection Observer for Info Cards
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+            // Info panels fade in
+            const panels = document.querySelectorAll('.info-panel');
+            panels.forEach(panel => {
+                const rect = panel.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.8) {
+                    panel.style.opacity = '1';
+                    panel.style.transform = 'translateY(0)';
                 }
             });
-        }, observerOptions);
-        
-        document.querySelectorAll('.info-card').forEach(card => {
-            observer.observe(card);
+            
+            // Hanok parallax
+            const hanok = document.querySelector('.hanok');
+            if (hanok) {
+                hanok.style.transform = `translateY(${scrollY * 0.2}px)`;
+            }
+            
+            // Scarecrow sway
+            const scarecrow = document.querySelector('.scarecrow');
+            if (scarecrow) {
+                scarecrow.style.transform = `rotate(${Math.sin(scrollY * 0.02) * 3}deg)`;
+            }
         });
         
-        // Mouse Parallax for Hanbok Characters
+        // Initialize panels opacity
+        document.querySelectorAll('.info-panel').forEach(panel => {
+            panel.style.opacity = '0';
+            panel.style.transform = 'translateY(50px)';
+            panel.style.transition = 'all 0.8s ease';
+        });
+        
+        // Add more floating elements dynamically
+        function createFloatingElement() {
+            const elements = ['🌸', '🎵', '🎭', '🍜', '💄'];
+            const element = document.createElement('div');
+            element.textContent = elements[Math.floor(Math.random() * elements.length)];
+            element.style.position = 'absolute';
+            element.style.fontSize = '30px';
+            element.style.left = Math.random() * 100 + '%';
+            element.style.top = window.scrollY + Math.random() * window.innerHeight + 'px';
+            element.style.animation = 'float-heart 4s ease-in-out';
+            element.style.zIndex = '5';
+            document.body.appendChild(element);
+            
+            setTimeout(() => element.remove(), 4000);
+        }
+        
+        // Create floating elements periodically
+        setInterval(createFloatingElement, 5000);
+        
+        // Smooth scroll to sections
+        document.querySelectorAll('.direction-sign').forEach(sign => {
+            sign.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = sign.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            });
+        });
+        
+        // Mouse parallax for small elements
         document.addEventListener('mousemove', (e) => {
             const mouseX = e.clientX / window.innerWidth - 0.5;
             const mouseY = e.clientY / window.innerHeight - 0.5;
             
-            const hanbokGirl = document.querySelector('.hanbok-girl');
-            const hanbokBoy = document.querySelector('.hanbok-boy');
-            
-            if(hanbokGirl) {
-                hanbokGirl.style.transform = `translateX(${mouseX * 20}px) translateY(${mouseY * 10}px)`;
-            }
-            
-            if(hanbokBoy) {
-                hanbokBoy.style.transform = `translateX(${mouseX * -20}px) translateY(${mouseY * -10}px)`;
-            }
+            document.querySelectorAll('.floating-heart').forEach((heart, index) => {
+                const speed = 20 + index * 10;
+                heart.style.transform = `translate(${mouseX * speed}px, ${mouseY * speed}px)`;
+            });
         });
     </script>
 </body>
