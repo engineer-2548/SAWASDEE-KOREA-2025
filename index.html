@@ -3,43 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAWASDEE KOREA 2025 - งาน K-Culture ที่ใหญ่ที่สุดแห่งปี</title>
+    <title>SAWASDEE KOREA 2025 - Korea Welcomes You!</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&display=swap');
         
         * {
             font-family: 'Kanit', sans-serif;
         }
         
-        :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --dark-gradient: linear-gradient(135deg, #1a1c20 0%, #2d3436 100%);
-        }
-        
         body {
-            transition: all 0.5s ease;
-            overflow-x: hidden;
-        }
-        
-        .dark-mode {
-            background: var(--dark-gradient);
-            color: #fff;
-        }
-        
-        .hero-gradient {
-            background: var(--primary-gradient);
-            animation: gradientShift 8s ease infinite;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #fda085 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            min-height: 100vh;
         }
         
         @keyframes gradientShift {
-            0%, 100% { background: var(--primary-gradient); }
-            50% { background: var(--secondary-gradient); }
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         
-        .float-animation {
+        .content-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .korean-flag {
+            background: linear-gradient(90deg, #003478 30%, #ffffff 30% 70%, #c60c30 70%);
+            height: 5px;
+            width: 100%;
+            margin: 20px 0;
+        }
+        
+        .title-glow {
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 
+                         0 0 40px rgba(102, 126, 234, 0.8), 
+                         0 0 60px rgba(245, 87, 108, 0.8);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.9; }
+        }
+        
+        .zone-badge {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 25px;
+            margin: 10px 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .zone-badge:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .activity-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20ного;
+            border-radius: 20px;
+            margin: 15px 0;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .activity-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .event-info {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .floating {
             animation: float 3s ease-in-out infinite;
         }
         
@@ -48,331 +100,171 @@
             50% { transform: translateY(-20px); }
         }
         
-        .pulse-animation {
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        .star-animation {
+            animation: starRotate 4s linear infinite;
         }
         
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: .5; }
+        @keyframes starRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
         
-        .slide-in {
-            animation: slideIn 0.8s ease-out;
-        }
-        
-        @keyframes slideIn {
-            from {
-                transform: translateX(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(0);
-                opacity: 1;
-            }
-        }
-        
-        .zone-card {
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.9);
-        }
-        
-        .dark-mode .zone-card {
-            background: rgba(30, 30, 30, 0.9);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .zone-card:hover {
-            transform: translateY(-10px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-        
-        .neon-text {
-            text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #ff00ff;
-        }
-        
-        .dark-mode .neon-text {
-            text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff;
-        }
-        
-        .korean-flag-colors {
-            background: linear-gradient(90deg, #003478 25%, #ffffff 25% 75%, #c60c30 75%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .scroll-indicator {
-            animation: bounce 2s infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-15px); }
-            60% { transform: translateY(-7px); }
-        }
-        
-        .sticky-nav {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.95);
-            transition: all 0.3s ease;
-        }
-        
-        .dark-mode .sticky-nav {
-            background: rgba(20, 20, 20, 0.95);
-        }
-        
-        .countdown-item {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            border-radius: 15px;
-            padding: 15px;
-            min-width: 80px;
-            text-align: center;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            animation: fadeIn 0.3s;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        .modal-content {
-            position: relative;
-            margin: 5% auto;
+        .countdown-timer {
+            background: rgba(0, 0, 0, 0.8);
+            color: #fff;
             padding: 20px;
-            width: 90%;
-            max-width: 600px;
-            background: white;
-            border-radius: 20px;
-            animation: slideDown 0.5s;
+            border-radius: 15px;
+            display: inline-block;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
         
-        @keyframes slideDown {
-            from {
-                transform: translateY(-50px);
-                opacity: 0;
+        @media (max-width: 768px) {
+            .content-container {
+                border-radius: 20px;
+                margin: 10px;
             }
-            to {
-                transform: translateY(0);
-                opacity: 1;
+            
+            .zone-badge {
+                display: block;
+                margin: 10px auto;
+                text-align: center;
             }
-        }
-        
-        .dark-mode .modal-content {
-            background: #2d3436;
-            color: white;
         }
     </style>
 </head>
-<body class="bg-gradient-to-br from-purple-50 to-pink-50 min-h-screen">
-    
-    <!-- Navigation Bar -->
-    <nav class="sticky-nav fixed top-0 w-full z-50 py-4 px-6 shadow-lg">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold korean-flag-colors">SAWASDEE KOREA 2025</h1>
-            <div class="flex items-center gap-4">
-                <button id="toggleMode" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 transition-all hover:scale-110">
-                    <i class="fas fa-moon text-gray-700 dark:text-yellow-300"></i>
-                </button>
-                <button onclick="openModal('ticket')" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-full hover:scale-105 transition-all">
-                    <i class="fas fa-ticket-alt mr-2"></i>จองตั๋ว
-                </button>
+<body>
+    <div class="container mx-auto px-4 py-8">
+        <div class="content-container p-8 md:p-12">
+            <!-- Header with Flags -->
+            <div class="text-center mb-8">
+                <div class="text-6xl floating">🇰🇷</div>
+                <h1 class="text-4xl md:text-6xl font-bold title-glow text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 my-4">
+                    ✨ SAWASDEE KOREA 2025 ✨
+                </h1>
+                <p class="text-2xl md:text-3xl font-semibold text-gray-800">Korea Welcomes You!</p>
+                <div class="korean-flag mt-6"></div>
             </div>
-        </div>
-    </nav>
-    
-    <!-- Hero Section -->
-    <section class="hero-gradient min-h-screen flex items-center justify-center text-white px-4 pt-20">
-        <div class="container mx-auto text-center">
-            <div class="float-animation mb-8">
-                <span class="text-6xl">🇰🇷</span>
+
+            <!-- Main Description -->
+            <div class="text-center mb-10">
+                <p class="text-xl md:text-2xl font-medium text-gray-700 leading-relaxed">
+                    🎊 สายเกาเตรียมตัวกรี๊ดได้เลย! 🎊<br>
+                    งาน K-Culture ที่ใหญ่ที่สุดแห่งปี<br>
+                    รวมทุกความเป็นเกาหลีมาไว้ในที่เดียว!
+                </p>
+                <p class="text-lg mt-4 text-gray-600">
+                    ไม่ว่าจะเป็นสายเที่ยว สายกิน สายบิวตี้ หรือสายติ่ง K-POP บอกเลยว่ามีครบ!
+                </p>
             </div>
-            <h1 class="text-4xl md:text-6xl font-bold mb-4 neon-text slide-in">
-                SAWASDEE KOREA 2025
-            </h1>
-            <p class="text-xl md:text-2xl mb-8 opacity-90">Korea Welcomes You! ✨</p>
-            <p class="text-lg md:text-xl mb-12 max-w-3xl mx-auto">
-                งาน K-Culture ที่ใหญ่ที่สุดแห่งปี รวมทุกความเป็นเกาหลีมาไว้ในที่เดียว!
-            </p>
-            
+
             <!-- Event Image -->
-            <div class="mb-12 max-w-4xl mx-auto">
+            <div class="text-center mb-10">
                 <img src="https://lh5.googleusercontent.com/d/1iq-TGA35xF7J3PPO3wzYPvdGIrZ8EJFk" 
-                     alt="SAWASDEE KOREA 2025" 
-                     class="w-full rounded-2xl shadow-2xl hover:scale-105 transition-transform duration-300">
+                     alt="SAWASDEE KOREA 2025 Event" 
+                     class="w-full max-w-4xl mx-auto rounded-2xl shadow-2xl hover:scale-105 transition-transform duration-300">
             </div>
-            
-            <!-- Countdown Timer -->
-            <div class="flex justify-center gap-4 mb-8 flex-wrap">
-                <div class="countdown-item">
-                    <div class="text-3xl font-bold" id="days">00</div>
-                    <div class="text-sm">วัน</div>
-                </div>
-                <div class="countdown-item">
-                    <div class="text-3xl font-bold" id="hours">00</div>
-                    <div class="text-sm">ชั่วโมง</div>
-                </div>
-                <div class="countdown-item">
-                    <div class="text-3xl font-bold" id="minutes">00</div>
-                    <div class="text-sm">นาที</div>
-                </div>
-                <div class="countdown-item">
-                    <div class="text-3xl font-bold" id="seconds">00</div>
-                    <div class="text-sm">วินาที</div>
-                </div>
-            </div>
-            
-            <div class="scroll-indicator text-4xl mt-8">
-                <i class="fas fa-chevron-down"></i>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Event Info -->
-    <section class="py-16 px-4">
-        <div class="container mx-auto">
-            <div class="grid md:grid-cols-3 gap-6 mb-12">
-                <div class="zone-card p-6 rounded-xl text-center hover:rotate-3">
-                    <i class="fas fa-calendar-alt text-4xl text-purple-600 mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">📅 วันที่จัดงาน</h3>
-                    <p>30-31 สิงหาคม 2025</p>
-                </div>
-                <div class="zone-card p-6 rounded-xl text-center hover:rotate-3">
-                    <i class="fas fa-clock text-4xl text-pink-600 mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">⏰ เวลา</h3>
-                    <p>10.00 - 20.00 น.</p>
-                </div>
-                <div class="zone-card p-6 rounded-xl text-center hover:rotate-3">
-                    <i class="fas fa-map-marker-alt text-4xl text-indigo-600 mb-4"></i>
-                    <h3 class="text-xl font-bold mb-2">📍 สถานที่</h3>
-                    <p>สุราลัย ฮอลล์ ชั้น 7 ICONSIAM</p>
+
+            <!-- Event Zones -->
+            <div class="mb-10">
+                <h2 class="text-3xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600">
+                    🎯 โซนกิจกรรมภายในงาน
+                </h2>
+                <div class="flex flex-wrap justify-center">
+                    <div class="zone-badge">
+                        <i class="fas fa-plane mr-2"></i>📌 K-Travel - แจกไอเดียทริป Autumn & Winter
+                    </div>
+                    <div class="zone-badge">
+                        <i class="fas fa-utensils mr-2"></i>🍜 K-Food & K-Wellness - ลองรสชาติ + เวิร์กช็อป
+                    </div>
+                    <div class="zone-badge">
+                        <i class="fas fa-palette mr-2"></i>💄 K-Beauty & Personal Color
+                    </div>
+                    <div class="zone-badge">
+                        <i class="fas fa-theater-masks mr-2"></i>🎭 K-Culture - การแสดงเกาหลีแท้ๆ
+                    </div>
                 </div>
             </div>
-            
-            <!-- Zones Section -->
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 korean-flag-colors">โซนกิจกรรมภายในงาน</h2>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div onclick="openModal('travel')" class="zone-card p-6 rounded-xl cursor-pointer group">
-                    <div class="text-4xl mb-4 group-hover:scale-125 transition-transform">✈️</div>
-                    <h3 class="text-xl font-bold mb-2">K-Travel</h3>
-                    <p class="text-sm">แจกไอเดียทริป Autumn & Winter พร้อมโปรสุดปัง ตั๋วเครื่องบิน โรงแรม รถเช่า</p>
-                </div>
+
+            <!-- Special Activities -->
+            <div class="mb-10">
+                <h2 class="text-3xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
+                    🎤 กิจกรรมพิเศษบนสเตจ
+                </h2>
                 
-                <div onclick="openModal('food')" class="zone-card p-6 rounded-xl cursor-pointer group">
-                    <div class="text-4xl mb-4 group-hover:scale-125 transition-transform">🍜</div>
-                    <h3 class="text-xl font-bold mb-2">K-Food & K-Wellness</h3>
-                    <p class="text-sm">ลองรสชาติอาหารเกาหลีแท้ๆ พร้อมเวิร์กช็อปสายเฮลท์ตี้</p>
-                </div>
-                
-                <div onclick="openModal('beauty')" class="zone-card p-6 rounded-xl cursor-pointer group">
-                    <div class="text-4xl mb-4 group-hover:scale-125 transition-transform">💄</div>
-                    <h3 class="text-xl font-bold mb-2">K-Beauty</h3>
-                    <p class="text-sm">Personal Color Analysis และเทรนด์ความงามจากเกาหลี</p>
-                </div>
-                
-                <div onclick="openModal('culture')" class="zone-card p-6 rounded-xl cursor-pointer group">
-                    <div class="text-4xl mb-4 group-hover:scale-125 transition-transform">🎭</div>
-                    <h3 class="text-xl font-bold mb-2">K-Culture</h3>
-                    <p class="text-sm">การแสดงเกาหลีแท้ๆ ขบวนพระราชพิธี & ดนตรีกูกัก</p>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="activity-card">
+                        <h3 class="text-xl font-bold mb-2">🎵 มินิคอนเสิร์ต</h3>
+                        <p>• No One Else<br>• ATLAS<br>• THE FIX<br>จากประเทศเกาหลี</p>
+                    </div>
+                    <div class="activity-card">
+                        <h3 class="text-xl font-bold mb-2">💃 Cover Dance & Singing Contest</h3>
+                        <p>ให้สายติ่งได้ปล่อยพลังเต็มที่!</p>
+                    </div>
+                    <div class="activity-card md:col-span-2">
+                        <h3 class="text-xl font-bold mb-2">💖 Exclusive Talk สุดพิเศษ</h3>
+                        <p>• "จองแฮอิน" 🫶 พูดคุยสุดฟิน<br>
+                        • "หมาก–คิม" 💕 เล่าความรักโรแมนติกสไตล์เกาหลี</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <!-- Special Events -->
-    <section class="py-16 px-4 bg-gradient-to-r from-purple-100 to-pink-100 dark:from-gray-800 dark:to-gray-900">
-        <div class="container mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">🎤 กิจกรรมพิเศษบนเวที</h2>
-            
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="zone-card p-8 rounded-xl">
-                    <h3 class="text-2xl font-bold mb-4 text-purple-600">🎵 Mini Concert</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-center"><i class="fas fa-microphone mr-3 text-pink-500"></i>No One Else</li>
-                        <li class="flex items-center"><i class="fas fa-microphone mr-3 text-pink-500"></i>ATLAS</li>
-                        <li class="flex items-center"><i class="fas fa-microphone mr-3 text-pink-500"></i>THE FIX</li>
-                    </ul>
-                </div>
-                
-                <div class="zone-card p-8 rounded-xl">
-                    <h3 class="text-2xl font-bold mb-4 text-pink-600">💖 Exclusive Talk</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-center"><i class="fas fa-heart mr-3 text-red-500"></i>จองแฮอิน - Special Guest</li>
-                        <li class="flex items-center"><i class="fas fa-heart mr-3 text-red-500"></i>หมาก-คิม - Love Story</li>
-                        <li class="flex items-center"><i class="fas fa-trophy mr-3 text-yellow-500"></i>Cover Dance Contest</li>
-                    </ul>
+
+            <!-- Giveaway Section -->
+            <div class="text-center mb-10">
+                <div class="star-animation inline-block text-4xl">🎁</div>
+                <h3 class="text-2xl font-bold mt-4 mb-2 text-purple-600">ของแจก ของรางวัล</h3>
+                <p class="text-lg text-gray-700">และกิจกรรมพิเศษเพียบตลอดทั้งวัน!</p>
+            </div>
+
+            <!-- Event Info -->
+            <div class="event-info">
+                <h2 class="text-2xl font-bold text-center mb-6 text-orange-800">📢 รายละเอียดงาน</h2>
+                <div class="grid md:grid-cols-3 gap-4 text-center">
+                    <div>
+                        <p class="text-3xl mb-2">📅</p>
+                        <p class="font-bold text-lg">วันที่</p>
+                        <p>30–31 สิงหาคม 2025</p>
+                    </div>
+                    <div>
+                        <p class="text-3xl mb-2">⏰</p>
+                        <p class="font-bold text-lg">เวลา</p>
+                        <p>10.00 – 20.00 น.</p>
+                    </div>
+                    <div>
+                        <p class="text-3xl mb-2">📍</p>
+                        <p class="font-bold text-lg">สถานที่</p>
+                        <p>สุราลัย ฮอลล์ ชั้น 7<br>ICONSIAM</p>
+                    </div>
                 </div>
             </div>
-            
-            <div class="text-center mt-12">
-                <button onclick="openModal('register')" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-full text-xl hover:scale-110 transition-all shadow-lg">
-                    <i class="fas fa-star mr-2"></i>ลงทะเบียนเข้าร่วมงาน
-                </button>
+
+            <!-- Countdown -->
+            <div class="text-center my-10">
+                <h3 class="text-2xl font-bold mb-4 text-purple-600">⏳ นับถอยหลังสู่งาน</h3>
+                <div class="countdown-timer">
+                    <span id="countdown">กำลังคำนวณ...</span>
+                </div>
             </div>
-        </div>
-    </section>
-    
-    <!-- Footer -->
-    <footer class="py-8 bg-gray-900 text-white text-center">
-        <div class="container mx-auto">
-            <p class="mb-4">ติดตามรายละเอียดเพิ่มเติม</p>
-            <div class="flex justify-center gap-4 mb-4">
-                <a href="https://www.facebook.com/KTOThailand" target="_blank" class="hover:scale-110 transition-transform">
-                    <i class="fab fa-facebook text-3xl"></i>
+
+            <!-- Footer -->
+            <div class="text-center mt-10 pt-6 border-t-2 border-gray-200">
+                <p class="text-xl font-semibold mb-4 text-blue-600">
+                    👉 ติดตามรายละเอียดเพิ่มเติมได้ที่
+                </p>
+                <a href="https://www.facebook.com/KTOThailand" target="_blank" 
+                   class="inline-block bg-blue-600 text-white px-8 py-3 rounded-full text-lg font-medium hover:bg-blue-700 transition-colors">
+                    <i class="fab fa-facebook mr-2"></i>Facebook: KTO Thailand
                 </a>
-                <a href="#" class="hover:scale-110 transition-transform">
-                    <i class="fab fa-instagram text-3xl"></i>
-                </a>
-                <a href="#" class="hover:scale-110 transition-transform">
-                    <i class="fab fa-twitter text-3xl"></i>
-                </a>
-            </div>
-            <p>&copy; 2025 SAWASDEE KOREA - Korea Tourism Organization</p>
-        </div>
-    </footer>
-    
-    <!-- Modal -->
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span onclick="closeModal()" class="absolute top-4 right-4 text-3xl cursor-pointer hover:text-red-500">&times;</span>
-            <div id="modalContent">
-                <!-- Dynamic content will be inserted here -->
+                <div class="mt-6">
+                    <p class="text-gray-600">Korea Tourism Organization Thailand</p>
+                    <p class="text-2xl mt-2">🇰🇷 🤝 🇹🇭</p>
+                </div>
             </div>
         </div>
     </div>
-    
+
     <script>
-        // Dark Mode Toggle
-        const toggleMode = document.getElementById('toggleMode');
-        const body = document.body;
-        
-        toggleMode.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-            const icon = toggleMode.querySelector('i');
-            if (body.classList.contains('dark-mode')) {
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-            } else {
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
-            }
-        });
-        
         // Countdown Timer
         function updateCountdown() {
             const eventDate = new Date('2025-08-30T10:00:00');
@@ -385,160 +277,15 @@
                 const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((diff % (1000 * 60)) / 1000);
                 
-                document.getElementById('days').textContent = String(days).padStart(2, '0');
-                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+                document.getElementById('countdown').textContent = 
+                    `${days} วัน ${hours} ชั่วโมง ${minutes} นาที ${seconds} วินาที`;
+            } else {
+                document.getElementById('countdown').textContent = 'งานเริ่มแล้ว!';
             }
         }
         
         setInterval(updateCountdown, 1000);
         updateCountdown();
-        
-        // Modal Functions
-        function openModal(type) {
-            const modal = document.getElementById('modal');
-            const modalContent = document.getElementById('modalContent');
-            
-            const content = {
-                travel: `
-                    <h2 class="text-2xl font-bold mb-4">✈️ K-Travel Zone</h2>
-                    <p class="mb-4">พบกับโปรโมชั่นพิเศษสำหรับการท่องเที่ยวเกาหลี</p>
-                    <ul class="list-disc list-inside space-y-2">
-                        <li>ตั๋วเครื่องบินราคาพิเศษ</li>
-                        <li>แพ็กเกจทัวร์ Autumn & Winter</li>
-                        <li>โรงแรมลดสูงสุด 50%</li>
-                        <li>รถเช่าพร้อมประกันภัย</li>
-                    </ul>
-                `,
-                food: `
-                    <h2 class="text-2xl font-bold mb-4">🍜 K-Food & Wellness</h2>
-                    <p class="mb-4">สัมผัสรสชาติอาหารเกาหลีแท้ๆ</p>
-                    <ul class="list-disc list-inside space-y-2">
-                        <li>ชิมอาหารเกาหลี 20+ เมนู</li>
-                        <li>คลาสทำกิมจิและข้าวห่อสาหร่าย</li>
-                        <li>เวิร์กช็อป K-Wellness</li>
-                        <li>ชาเกาหลีและขนมแท้ๆ</li>
-                    </ul>
-                `,
-                beauty: `
-                    <h2 class="text-2xl font-bold mb-4">💄 K-Beauty Zone</h2>
-                    <p class="mb-4">ค้นพบความลับความงามแบบเกาหลี</p>
-                    <ul class="list-disc list-inside space-y-2">
-                        <li>Personal Color Analysis ฟรี!</li>
-                        <li>แมคอัพสไตล์เกาหลี</li>
-                        <li>ผลิตภัณฑ์ K-Beauty ลดสูงสุด 70%</li>
-                        <li>สกินแคร์รูทีนแบบเกาหลี</li>
-                    </ul>
-                `,
-                culture: `
-                    <h2 class="text-2xl font-bold mb-4">🎭 K-Culture Experience</h2>
-                    <p class="mb-4">ดื่มด่ำวัฒนธรรมเกาหลีแท้</p>
-                    <ul class="list-disc list-inside space-y-2">
-                        <li>การแสดงขบวนพระราชพิธี</li>
-                        <li>ดนตรีกูกักแบบดั้งเดิม</li>
-                        <li>ใส่ชุดฮันบกถ่ายภาพ</li>
-                        <li>เรียนรู้ภาษาเกาหลีเบื้องต้น</li>
-                    </ul>
-                `,
-                ticket: `
-                    <h2 class="text-2xl font-bold mb-4">🎫 จองตั๋วเข้างาน</h2>
-                    <form class="space-y-4">
-                        <input type="text" placeholder="ชื่อ-นามสกุล" class="w-full p-3 border rounded-lg">
-                        <input type="email" placeholder="อีเมล" class="w-full p-3 border rounded-lg">
-                        <input type="tel" placeholder="เบอร์โทรศัพท์" class="w-full p-3 border rounded-lg">
-                        <select class="w-full p-3 border rounded-lg">
-                            <option>เลือกวันที่เข้างาน</option>
-                            <option>30 สิงหาคม 2025</option>
-                            <option>31 สิงหาคม 2025</option>
-                            <option>ทั้ง 2 วัน</option>
-                        </select>
-                        <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-lg hover:opacity-90">
-                            ยืนยันการจอง
-                        </button>
-                    </form>
-                `,
-                register: `
-                    <h2 class="text-2xl font-bold mb-4">📝 ลงทะเบียนกิจกรรม</h2>
-                    <form class="space-y-4">
-                        <input type="text" placeholder="ชื่อ-นามสกุล" class="w-full p-3 border rounded-lg">
-                        <input type="email" placeholder="อีเมล" class="w-full p-3 border rounded-lg">
-                        <div class="space-y-2">
-                            <label class="block font-semibold">เลือกกิจกรรมที่สนใจ:</label>
-                            <label class="flex items-center">
-                                <input type="checkbox" class="mr-2"> Mini Concert
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" class="mr-2"> Cover Dance Contest
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" class="mr-2"> Exclusive Talk
-                            </label>
-                            <label class="flex items-center">
-                                <input type="checkbox" class="mr-2"> K-Food Workshop
-                            </label>
-                        </div>
-                        <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 rounded-lg hover:opacity-90">
-                            ลงทะเบียน
-                        </button>
-                    </form>
-                `
-            };
-            
-            modalContent.innerHTML = content[type] || '<p>Content not available</p>';
-            modal.style.display = 'block';
-        }
-        
-        function closeModal() {
-            document.getElementById('modal').style.display = 'none';
-        }
-        
-        // Close modal when clicking outside
-        window.onclick = function(event) {
-            const modal = document.getElementById('modal');
-            if (event.target == modal) {
-                modal.style.display = 'none';
-            }
-        }
-        
-        // Smooth scroll animation
-        document.addEventListener('DOMContentLoaded', function() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('slide-in');
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            document.querySelectorAll('.zone-card').forEach(card => {
-                observer.observe(card);
-            });
-        });
-        
-        // Parallax effect on scroll
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallax = document.querySelector('.hero-gradient');
-            if (parallax) {
-                parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
-            }
-        });
-        
-        // Add interactive particle background
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'absolute w-2 h-2 bg-purple-400 rounded-full opacity-50';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDuration = Math.random() * 3 + 2 + 's';
-            particle.style.animation = 'float 3s ease-in-out infinite';
-            document.querySelector('.hero-gradient').appendChild(particle);
-            
-            setTimeout(() => particle.remove(), 5000);
-        }
-        
-        // Create particles periodically
-        setInterval(createParticle, 500);
     </script>
 </body>
 </html>
